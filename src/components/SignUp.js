@@ -10,18 +10,13 @@ export default function SignUp() {
   const [formInfo, setFormInfo] = useState({ name: '', email: '', password: '' });
   function handleForm(e) {
     setFormInfo({ ...formInfo, [e.target.name]: e.target.value });
-    console.log(formInfo)
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("customer sendo criado")
-    console.log(REACT_APP_API_URL)
     const promise = axios.post(`${REACT_APP_API_URL}/signUp`, ({ ...formInfo }));
      promise.then((response) => {
         navigate("/signin");
-        console.log("Customer created")
-        console.log(response)
       })
       promise.catch((error) => {
         console.log(error.response);

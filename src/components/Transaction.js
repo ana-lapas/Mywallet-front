@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
-import {AuthContext} from "../Contexts/AuthContext";
+import { AuthContext } from "../Contexts/AuthContext";
 import { REACT_APP_API_URL } from "../components/SignIn";
 
 export default function Transactions(props) {
@@ -10,25 +10,22 @@ export default function Transactions(props) {
   const { jwt, setJwt } = useContext(AuthContext);
   const navigate = useNavigate();
   const { type } = useParams();
-  const [formInfo, setFormInfo] = useState({ type:type, description: '', value: '' })
-  
-  
+  const [formInfo, setFormInfo] = useState({ type: type, description: '', value: '' })
+
+
   function handleForm(e) {
     setFormInfo({ ...formInfo, [e.target.name]: e.target.value });
-    console.log(formInfo)
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    const promise = axios.post(`${REACT_APP_API_URL}/transactions`, ({ ...formInfo }),{
+    const promise = axios.post(`${REACT_APP_API_URL}/transactions`, ({ ...formInfo }), {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
     })
     promise.then((response) => {
-      console.log(response.data);
       navigate("/");
-      console.log("Adicionou nova transação")
     });
     promise.catch((error) => {
       console.log(error.response);
@@ -70,7 +67,7 @@ const Container = styled.div`
   color: #ffffff;
   background-color: #8c11be;
 `
-  const Topo = styled.div`
+const Topo = styled.div`
  display: flex;
  width: 336px;
  margin-top:10px;
@@ -83,14 +80,14 @@ const Container = styled.div`
       line-height: 50px;
       text-align: flex-start;
 `
-  const Form = styled.form`
+const Form = styled.form`
   display:flex; 
   flex-direction: column;
   align-items: center;
   justify-content: center;  
   margin: 25px 0 25px;
  `
-  const Input = styled.input`
+const Input = styled.input`
   width: 305px;
   height: 40px;
   font-size: 20px;
@@ -104,7 +101,7 @@ const Container = styled.div`
   background-color: "#FFFFFF";
   color: #000000;
 `
-  const Button = styled.button`
+const Button = styled.button`
   width: 325px;
   height: 46px;
   display: flex;

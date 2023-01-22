@@ -28,16 +28,15 @@ export default function Home() {
       .then((res) => {
         setUser(res.data.user);
         setTransactions(res.data.transactions);
-        console.log(transactions)
-        let saldo = 0;
-        res.data.transactions.forEach((t) => {
-          if (t.type = "entrada") {
-            saldo += Number(t.value);
-          } else {
-            saldo -= Number(t.value);
+        let totalCash = 0;
+        res.data.transactions.map((t) => {
+          if (t.type === "saida") {
+            totalCash -= Number(t.value);
+          } else if (t.type === "entrada") {
+            totalCash += Number(t.value);
           }
         })
-        setTotalTransactions(saldo);
+        setTotalTransactions(totalCash);
       })
       .catch((err) => {
         return err.response;
@@ -47,7 +46,7 @@ export default function Home() {
     setJwt("");
     navigate("/signin");
   }
-  function transactionType (type){
+  function transactionType(type) {
     navigate(`transaction/${type}`)
   }
   return (<Container>
@@ -56,14 +55,16 @@ export default function Home() {
       <ion-icon name="log-out-outline" onClick={exit}></ion-icon></Headers>
     <Operations>
       <ul>
-        {(transactions.map((t, index) => (<><li>
-          <ItemValor key={index}>
-            <div className="data">{t.date}</div>
-            <div className="desc">{t.description}</div>
-          </ItemValor>
-          <TType><p className={t.type === "entrada" ? "verde" : "vermelho"}>R${t.value}</p></TType>
-        </li></>
-        )))} </ul>
+        {(transactions.map((t, index) => (
+          <li key={index}>
+            <ItemValor key={index}>
+              <div className="data">{t.date}</div>
+              <div className="desc">{t.description}</div>
+            </ItemValor>
+            <TType><p className={t.type == "entrada" ? "verde" : "vermelho"}>R${t.value}</p></TType>
+          </li>
+        )))}
+      </ul>
       <AllFlow><div>Saldo</div> <div><p className={totalTransactions > 0 ? "verde" : "vermelho"}>R${totalTransactions}</p></div>    </AllFlow>
     </Operations>
     <Buttons>
@@ -152,7 +153,7 @@ const ItemValor = styled.div`
     align-items: center;
     color: #000;
     .data{
-    margin-left:30px;
+    margin-left:10px;
     margin-top:10px;
     width: 50px;
     color: #c6c6c6;
@@ -165,6 +166,8 @@ const ItemValor = styled.div`
   }
 `
 const TType = styled.div`
+ margin-left:10px;
+    margin-top:10px;
 .verde {
   color: green;
 }

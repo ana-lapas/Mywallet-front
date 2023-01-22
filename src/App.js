@@ -1,4 +1,4 @@
-import  AuthProvider  from "./Contexts/AuthContext";
+import AuthProvider from "./Contexts/AuthContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from "./components/SignIn.js";
 import SignUp from "./components/SignUp.js";
