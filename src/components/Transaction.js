@@ -9,8 +9,7 @@ export default function Transactions(props) {
   const { jwt, setJwt } = useContext(AuthContext);
   const navigate = useNavigate();
   const { type } = useParams();
-  const [formInfo, setFormInfo] = useState({ type: type, description: '', value: '' })
-
+  const [formInfo, setFormInfo] = useState({ type: type, description: '', value: '' });
 
   function handleForm(e) {
     setFormInfo({ ...formInfo, [e.target.name]: e.target.value });
