@@ -12,7 +12,7 @@ export default function Home() {
   const { jwt, setJwt } = useContext(AuthContext);
   const navigate = useNavigate();
   const [user, setUser] = useState({});
-  const [transactions, setTransactions] = useState(undefined);
+  const [transactions, setTransactions] = useState([]);
   const [totalTransactions, setTotalTransactions] = useState(0);
 
   async function allTransactions() {
@@ -54,7 +54,7 @@ export default function Home() {
       <ion-icon name="log-out-outline" onClick={exit} data-test="logout"></ion-icon></Headers>
     <Operations>
       <ul>
-        {(transactions.length > 0) ? (transactions.map((t, index) => (
+        {(transactions.map((t, index) => (
           <li key={index}>
             <ItemValor key={index}>
               <div className="data">{t.date}</div>
@@ -62,7 +62,7 @@ export default function Home() {
             </ItemValor>
             <TType><p className={t.type == "entrada" ? "verde" : "vermelho"} data-test="registry-amount">R${t.value}</p></TType>
           </li>
-        ))) : <p className="noRecords"> Não há registros de entrada ou saída</p>}
+        )))}
       </ul>
       <AllFlow><div>Saldo</div> <div><p className={totalTransactions > 0 ? "verde" : "vermelho"} data-test="total-amount">R${totalTransactions}</p></div>    </AllFlow>
     </Operations>
