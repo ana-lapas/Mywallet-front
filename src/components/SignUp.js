@@ -33,6 +33,7 @@ export default function SignUp() {
         value={formInfo.nome}
         focus
         required
+        data-test="name"
       />
       <Input type="email"
         placeholder="Email"
@@ -41,6 +42,7 @@ export default function SignUp() {
         value={formInfo.email}
         focus
         required
+        data-test="email"
       />
       <Input type="password"
         placeholder="Senha"
@@ -48,8 +50,9 @@ export default function SignUp() {
         onChange={handleForm}
         value={formInfo.password}
         required
+        data-test="password"
       />
-      <Button type="submit">Cadastrar</Button>
+      <Button type="submit" data-test="sign-up-submit">Cadastrar</Button>
     </Form>
     <LoginLink onClick={() => navigate("/signin")} >
       Já tem uma conta? Entre agora!

@@ -44,6 +44,7 @@ export default function Transactions(props) {
         value={formInfo.cost}
         focus
         required
+        data-test="registry-amount-input"
       />
 
       <Input type="string"
@@ -53,9 +54,10 @@ export default function Transactions(props) {
         value={formInfo.description}
         focus
         required
+        data-test="registry-name-input"
       />
 
-      <Button type="submit">Salvar {type}</Button>
+      <Button type="submit" data-test="registry-save">Salvar {type}</Button>
     </Form>
   </Container>)
 }

@@ -39,6 +39,7 @@ export default function SignIn() {
           value={formInfo.email}
           focus
           required
+          data-test="email"
         />
 
         <Input type="password"
@@ -48,9 +49,10 @@ export default function SignIn() {
           value={formInfo.password}
           focus
           required
+          data-test="password"
         />
 
-        <Button type="submit">Entrar</Button>
+        <Button type="submit" data-test="sign-in-submit">Entrar</Button>
       </Form>
         <RegisterLink onClick={()=>navigate("/signup")}>
           Primeira vez? Cadastre-se!

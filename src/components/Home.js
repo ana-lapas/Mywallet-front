@@ -12,7 +12,7 @@ export default function Home() {
   const { jwt, setJwt } = useContext(AuthContext);
   const navigate = useNavigate();
   const [user, setUser] = useState({});
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState(undefined);
   const [totalTransactions, setTotalTransactions] = useState(0);
 
   async function allTransactions() {
@@ -50,28 +50,28 @@ export default function Home() {
   }
   return (<Container>
     <Headers>
-      <h1>Olá, {user.name}</h1>
-      <ion-icon name="log-out-outline" onClick={exit}></ion-icon></Headers>
+      <h1 data-test="user-name">Olá, {user.name}</h1>
+      <ion-icon name="log-out-outline" onClick={exit} data-test="logout"></ion-icon></Headers>
     <Operations>
       <ul>
-        {(transactions.map((t, index) => (
+        {(transactions.length > 0) ? (transactions.map((t, index) => (
           <li key={index}>
             <ItemValor key={index}>
               <div className="data">{t.date}</div>
-              <div className="desc">{t.description}</div>
+              <div className="desc" data-test="registry-name">{t.description}</div>
             </ItemValor>
-            <TType><p className={t.type == "entrada" ? "verde" : "vermelho"}>R${t.value}</p></TType>
+            <TType><p className={t.type == "entrada" ? "verde" : "vermelho"} data-test="registry-amount">R${t.value}</p></TType>
           </li>
-        )))}
+        ))) : <p className="noRecords"> Não há registros de entrada ou saída</p>}
       </ul>
-      <AllFlow><div>Saldo</div> <div><p className={totalTransactions > 0 ? "verde" : "vermelho"}>R${totalTransactions}</p></div>    </AllFlow>
+      <AllFlow><div>Saldo</div> <div><p className={totalTransactions > 0 ? "verde" : "vermelho"} data-test="total-amount">R${totalTransactions}</p></div>    </AllFlow>
     </Operations>
     <Buttons>
-      <OptionsTo onClick={() => transactionType("entrada")}>
+      <OptionsTo onClick={() => transactionType("entrada")} data-tes="new-income">
         <div><ion-icon name="add-circle-outline"></ion-icon></div>
         <p>Nova <br /> Entrada</p>
       </OptionsTo>
-      <OptionsTo onClick={() => transactionType("saida")}>
+      <OptionsTo onClick={() => transactionType("saida")} data-tes="new-expense">
         <div><ion-icon name="close-circle-outline"></ion-icon></div>
         <p>Nova <br /> Saída</p>
       </OptionsTo>
@@ -142,6 +142,19 @@ ul li {
   color: #000000;
   font-size: 16px;
   }
+.noRecords{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+    align-items: center;
+  font-family: "Raleway", sans-serif;
+  color: #c6c6c6;
+font-size: 20px;
+font-weight: 400;
+line-height: 23px;
+text-align: center;
+
+}
   
 `
 const ItemValor = styled.div`
