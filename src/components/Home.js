@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AuthContext } from "../Contexts/AuthContext";
-import { REACT_APP_API_URL } from "../components/SignIn";
 import axios from "axios";
 
 export default function Home() {
@@ -20,7 +19,7 @@ export default function Home() {
     if (!jwt) {
       navigate("/signin");
     }
-    await axios.get(`${REACT_APP_API_URL}/transactions`, {
+    await axios.get(`${process.env.REACT_APP_API_URL}/transactions`, {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },

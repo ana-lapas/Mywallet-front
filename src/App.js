@@ -5,8 +5,8 @@ import SignUp from "./components/SignUp.js";
 import Home from "./components/Home";
 import Transaction from "./components/Transaction";
 import { GlobalStyle } from "./globalStyles";
-function App() {
 
+function App() {
   return (
     <>
       <GlobalStyle />

@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "../Contexts/AuthContext";
-import { REACT_APP_API_URL } from "../components/SignIn";
 
 export default function Transactions(props) {
   const tipo = props;
@@ -19,7 +18,7 @@ export default function Transactions(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const promise = axios.post(`${REACT_APP_API_URL}/transactions`, ({ ...formInfo }), {
+    const promise = axios.post(`${process.env.REACT_APP_API_URL}/transactions`, ({ ...formInfo }), {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },

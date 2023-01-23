@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import AuthContext from "../Contexts/AuthContext";
-import {REACT_APP_API_URL} from "../components/SignIn";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -14,7 +13,7 @@ export default function SignUp() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const promise = axios.post(`${REACT_APP_API_URL}/signUp`, ({ ...formInfo }));
+    const promise = axios.post(`${process.env.REACT_APP_API_URL}/signUp`, ({ ...formInfo }));
      promise.then((response) => {
         navigate("/signin");
       })

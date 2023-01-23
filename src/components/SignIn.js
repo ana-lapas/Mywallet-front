@@ -5,8 +5,6 @@ import axios from "axios";
 import {AuthContext} from "../Contexts/AuthContext";
 import { useContext } from "react";
 
-export const REACT_APP_API_URL = "http://localhost:5000";
-
 export default function SignIn() {
   const { setJwt } = useContext(AuthContext);
   const navigate = useNavigate();  
@@ -19,7 +17,7 @@ export default function SignIn() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const promise = axios.post(`${REACT_APP_API_URL}/signIn`, ({ ...formInfo }))
+    const promise = axios.post(`${process.env.REACT_APP_API_URL}/signIn`, ({ ...formInfo }))
     .then((res) => {
       setJwt(res.data.token);
       navigate("/");
