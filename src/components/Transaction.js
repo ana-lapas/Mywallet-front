@@ -17,6 +17,10 @@ export default function Transactions(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!jwt) {
+      alert("Faça Login")
+      navigate("/signin");
+    }
     const promise = axios.post(`${process.env.REACT_APP_API_URL}/transactions`, ({ ...formInfo }), {
       headers: {
         Authorization: `Bearer ${jwt}`,
