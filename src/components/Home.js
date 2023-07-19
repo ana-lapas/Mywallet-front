@@ -5,9 +5,7 @@ import { AuthContext } from "../Contexts/AuthContext";
 import axios from "axios";
 
 export default function Home() {
-  useEffect(() => {
-    allTransactions();
-  }, [])
+
 
   const { jwt, setJwt } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -48,6 +46,9 @@ export default function Home() {
   function transactionType(type) {
     navigate(`transaction/${type}`)
   }
+  useEffect(() => {
+    allTransactions();
+  }, [])
   return (<Container>
     <Headers>
       <h1 data-test="user-name">Olá, {user.name}</h1>
